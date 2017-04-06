@@ -1,0 +1,14 @@
+[{
+  "modid": "twitchforge",
+  "name": "TwitchForge",
+  "description": "Twitch.tv channel notifier",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["DarkMorford"],
+  "credits": "Thanks to the Minecraft Modding Discord for all the help!",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}]
