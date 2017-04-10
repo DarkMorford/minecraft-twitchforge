@@ -1,6 +1,6 @@
 package net.darkmorford.twitchforge.twitch;
 
-class Channel
+public class Channel
 {
     public Long    _id;
     public String  broadcaster_language;

@@ -1,6 +1,6 @@
 package net.darkmorford.twitchforge.twitch;
 
-class Stream
+public class Stream
 {
     public Long    _id;
     public String  game;

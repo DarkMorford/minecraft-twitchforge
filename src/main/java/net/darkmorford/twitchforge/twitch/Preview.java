@@ -1,6 +1,6 @@
 package net.darkmorford.twitchforge.twitch;
 
-class Preview
+public class Preview
 {
     public String small;
     public String medium;
