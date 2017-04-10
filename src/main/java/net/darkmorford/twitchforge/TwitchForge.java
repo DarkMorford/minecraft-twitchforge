@@ -1,5 +1,6 @@
 package net.darkmorford.twitchforge;
 
+import net.darkmorford.twitchforge.command.CommandMain;
 import net.darkmorford.twitchforge.proxy.CommonProxy;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -59,5 +60,7 @@ public class TwitchForge
     {
         // Sample things to do in this event handler:
         // Register commands
+
+        event.registerServerCommand(new CommandMain());
     }
 }
