@@ -5,6 +5,8 @@ import java.time.Instant;
 
 public class TwitchState
 {
+    public static final String twitchApiKey = "tuf4r166cwig76d4dxwfo6lm41sfl6";
+
     public static Boolean isStreamOnline = false;
 
     public static Long    channelId;

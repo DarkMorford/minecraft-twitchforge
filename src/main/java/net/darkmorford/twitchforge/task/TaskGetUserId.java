@@ -34,7 +34,7 @@ public class TaskGetUserId implements Runnable
         // Create a request object and set necessary headers
         HttpGet request = new HttpGet(twitchEndpoint);
         request.addHeader("Accept", "application/vnd.twitchtv.v5+json");
-        request.addHeader("Client-ID", Config.twitchApiKey);
+        request.addHeader("Client-ID", TwitchState.twitchApiKey);
 
         // Create an HTTP client for the transaction
         CloseableHttpClient client = HttpClients.createDefault();

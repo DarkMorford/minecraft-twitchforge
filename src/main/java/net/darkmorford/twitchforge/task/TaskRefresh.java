@@ -2,7 +2,6 @@ package net.darkmorford.twitchforge.task;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.darkmorford.twitchforge.Config;
 import net.darkmorford.twitchforge.TwitchForge;
 import net.darkmorford.twitchforge.twitch.Stream;
 import net.darkmorford.twitchforge.twitch.TwitchState;
@@ -27,12 +26,12 @@ public class TaskRefresh implements Runnable
         // https://dev.twitch.tv/docs/v5/reference/streams/
 
         // Build the URI for the data we want
-        String twitchEndpoint = String.format("https://api.twitch.tv/kraken/streams/%s", Config.twitchChannel);
+        String twitchEndpoint = String.format("https://api.twitch.tv/kraken/streams/%d", TwitchState.channelId);
 
         // Create a request object and set necessary headers
         HttpGet request = new HttpGet(twitchEndpoint);
         request.addHeader("Accept", "application/vnd.twitchtv.v5+json");
-        request.addHeader("Client-ID", Config.twitchApiKey);
+        request.addHeader("Client-ID", TwitchState.twitchApiKey);
 
         // Create an HTTP client for the transaction
         CloseableHttpClient client = HttpClients.createDefault();
