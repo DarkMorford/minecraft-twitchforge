@@ -35,7 +35,7 @@ public class CommandMain extends CommandBase
         }
         else
         {
-            sender.addChatMessage(new TextComponentString("That command can only be performed from the server!"));
+            sender.addChatMessage(new TextComponentString(TextFormatting.RED + "That command can only be performed from the server!"));
         }
     }
 }
