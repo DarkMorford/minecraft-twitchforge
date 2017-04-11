@@ -1,6 +1,9 @@
 package net.darkmorford.twitchforge.task;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import net.darkmorford.twitchforge.Config;
 import net.darkmorford.twitchforge.TwitchForge;
 import net.darkmorford.twitchforge.twitch.Stream;
@@ -20,6 +23,8 @@ public class TaskGetUserId implements Runnable
     @Override
     public void run()
     {
+        // https://dev.twitch.tv/docs/v5/guides/using-the-twitch-api/
+
         // Build the URI for the data we want
         String twitchEndpoint = String.format("https://api.twitch.tv/kraken/users?login=%s", Config.twitchChannel);
 
@@ -39,12 +44,15 @@ public class TaskGetUserId implements Runnable
             // Get the JSON string from the response
             String responseString = IOUtils.toString(responseBody.getContent(), StandardCharsets.UTF_8);
 
-            // Convert the JSON response into an object
-//          Gson gson = new Gson();
-//          Stream streamStatus = gson.fromJson(responseString, Stream.class);
-
             // Done with the web response, go ahead and close it
             response.close();
+
+            // Convert the JSON response into an object
+            Gson gson = new Gson();
+            JsonParser jParser = new JsonParser();
+            JsonObject rootObj = jParser.parse(responseString).getAsJsonObject();
+            int totalUsers = gson.fromJson(rootObj.get("_total"), int.class);
+            JsonArray userArray = rootObj.get("users").getAsJsonArray();
         }
         catch (IOException e)
         {

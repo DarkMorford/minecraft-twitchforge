@@ -20,6 +20,8 @@ public class TaskRefresh implements Runnable
     @Override
     public void run()
     {
+        // https://dev.twitch.tv/docs/v5/reference/streams/
+
         // Build the URI for the data we want
         String twitchEndpoint = String.format("https://api.twitch.tv/kraken/streams/%s", Config.twitchChannel);
 
