@@ -1,12 +1,13 @@
 package net.darkmorford.twitchforge.task;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.darkmorford.twitchforge.Config;
 import net.darkmorford.twitchforge.TwitchForge;
-import net.darkmorford.twitchforge.twitch.Stream;
+import net.darkmorford.twitchforge.twitch.User;
+import net.darkmorford.twitchforge.utils.InstantDeserializer;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -17,6 +18,7 @@ import org.apache.logging.log4j.Level;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.time.Instant;
 
 public class TaskGetUserId implements Runnable
 {
@@ -35,24 +37,21 @@ public class TaskGetUserId implements Runnable
 
         // Create an HTTP client for the transaction
         CloseableHttpClient client = HttpClients.createDefault();
-        try
+        try (CloseableHttpResponse response = client.execute(request))
         {
             // Perform the network request
-            CloseableHttpResponse response = client.execute(request);
             HttpEntity responseBody = response.getEntity();
 
             // Get the JSON string from the response
             String responseString = IOUtils.toString(responseBody.getContent(), StandardCharsets.UTF_8);
 
-            // Done with the web response, go ahead and close it
-            response.close();
-
-            // Convert the JSON response into an object
-            Gson gson = new Gson();
+            // Convert the JSON into data objects
+            Gson gson = new GsonBuilder().registerTypeAdapter(Instant.class, new InstantDeserializer()).create();
             JsonParser jParser = new JsonParser();
             JsonObject rootObj = jParser.parse(responseString).getAsJsonObject();
+
             int totalUsers = gson.fromJson(rootObj.get("_total"), int.class);
-            JsonArray userArray = rootObj.get("users").getAsJsonArray();
+            User[] users = gson.fromJson(rootObj.get("users"), User[].class);
         }
         catch (IOException e)
         {

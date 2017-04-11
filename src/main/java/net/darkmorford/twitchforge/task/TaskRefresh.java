@@ -1,9 +1,11 @@
 package net.darkmorford.twitchforge.task;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import net.darkmorford.twitchforge.Config;
 import net.darkmorford.twitchforge.TwitchForge;
 import net.darkmorford.twitchforge.twitch.Stream;
+import net.darkmorford.twitchforge.utils.InstantDeserializer;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -14,6 +16,7 @@ import org.apache.logging.log4j.Level;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.time.Instant;
 
 public class TaskRefresh implements Runnable
 {
@@ -32,21 +35,17 @@ public class TaskRefresh implements Runnable
 
         // Create an HTTP client for the transaction
         CloseableHttpClient client = HttpClients.createDefault();
-        try
+        try (CloseableHttpResponse response = client.execute(request))
         {
-            // Perform the network request
-            CloseableHttpResponse response = client.execute(request);
+            // Get the response body
             HttpEntity responseBody = response.getEntity();
 
             // Get the JSON string from the response
             String responseString = IOUtils.toString(responseBody.getContent(), StandardCharsets.UTF_8);
 
-            // Convert the JSON response into an object
-            Gson gson = new Gson();
+            // Convert the JSON a data object
+            Gson gson = new GsonBuilder().registerTypeAdapter(Instant.class, new InstantDeserializer()).create();
             Stream streamStatus = gson.fromJson(responseString, Stream.class);
-
-            // Done with the web response, go ahead and close it
-            response.close();
         }
         catch (IOException e)
         {

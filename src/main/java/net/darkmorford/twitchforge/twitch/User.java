@@ -1,15 +1,18 @@
 package net.darkmorford.twitchforge.twitch;
 
+import java.net.URI;
+import java.time.Instant;
+
 public class User
 {
-    public Long   _id;
-    public String bio;
-    public String created_at;
-    public String display_name;
-    public String logo;
-    public String name;
-    public String type;
-    public String updated_at;
+    public Long    _id;
+    public String  bio;
+    public Instant created_at;
+    public String  display_name;
+    public URI     logo;
+    public String  name;
+    public String  type;
+    public Instant updated_at;
 
     User()
     {

@@ -1,11 +1,13 @@
 package net.darkmorford.twitchforge.twitch;
 
+import java.net.URI;
+
 public class Preview
 {
-    public String small;
-    public String medium;
-    public String large;
-    public String template;
+    public URI small;
+    public URI medium;
+    public URI large;
+    public URI template;
 
     Preview()
     {
