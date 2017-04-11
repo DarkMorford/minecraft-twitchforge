@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.darkmorford.twitchforge.Config;
 import net.darkmorford.twitchforge.TwitchForge;
+import net.darkmorford.twitchforge.twitch.TwitchState;
 import net.darkmorford.twitchforge.twitch.User;
 import net.darkmorford.twitchforge.utils.InstantDeserializer;
 import org.apache.commons.io.IOUtils;
@@ -50,8 +51,11 @@ public class TaskGetUserId implements Runnable
             JsonParser jParser = new JsonParser();
             JsonObject rootObj = jParser.parse(responseString).getAsJsonObject();
 
-            int totalUsers = gson.fromJson(rootObj.get("_total"), int.class);
             User[] users = gson.fromJson(rootObj.get("users"), User[].class);
+
+            User mainUser = users[0];
+            TwitchState.channelId = mainUser._id;
+            TwitchState.channelDisplayName = mainUser.display_name;
         }
         catch (IOException e)
         {

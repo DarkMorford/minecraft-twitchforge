@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import net.darkmorford.twitchforge.Config;
 import net.darkmorford.twitchforge.TwitchForge;
 import net.darkmorford.twitchforge.twitch.Stream;
+import net.darkmorford.twitchforge.twitch.TwitchState;
 import net.darkmorford.twitchforge.utils.InstantDeserializer;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
@@ -46,6 +47,22 @@ public class TaskRefresh implements Runnable
             // Convert the JSON a data object
             Gson gson = new GsonBuilder().registerTypeAdapter(Instant.class, new InstantDeserializer()).create();
             Stream streamStatus = gson.fromJson(responseString, Stream.class);
+
+            if (streamStatus._id == null)
+            {
+                TwitchState.isStreamOnline = false;
+            }
+            else
+            {
+                // TODO: Signal when the stream transitions to online
+
+                TwitchState.isStreamOnline = true;
+
+                TwitchState.streamGame = streamStatus.game;
+                TwitchState.streamStartTime = streamStatus.created_at;
+                TwitchState.streamTitle = streamStatus.channel.status;
+                TwitchState.streamUri = streamStatus.channel.url;
+            }
         }
         catch (IOException e)
         {
