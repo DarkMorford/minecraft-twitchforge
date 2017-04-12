@@ -28,8 +28,16 @@ public class TaskRefresh implements Runnable
 
         // Build the URI for the data we want
         TwitchState.channelLock.readLock().lock();
-        String twitchEndpoint = String.format("https://api.twitch.tv/kraken/streams/%d", TwitchState.channelId);
+        Long channelId = TwitchState.channelId;
         TwitchState.channelLock.readLock().unlock();
+
+        if (channelId == 0L)
+        {
+            TwitchForge.logger.log(Level.ERROR, "Refresh called before User ID initialized");
+            return;
+        }
+
+        String twitchEndpoint = String.format("https://api.twitch.tv/kraken/streams/%d", channelId);
 
         // Create a request object and set necessary headers
         HttpGet request = new HttpGet(twitchEndpoint);
@@ -59,7 +67,11 @@ public class TaskRefresh implements Runnable
             }
             else
             {
-                // TODO: Signal when the stream transitions to online
+                if (!TwitchState.isStreamOnline)
+                {
+                    // TODO: Signal when the stream transitions to online
+                    TwitchForge.logger.log(Level.INFO, "Streamer has just gone online!");
+                }
 
                 TwitchState.isStreamOnline = true;
 

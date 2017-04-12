@@ -12,7 +12,7 @@ public class TwitchState
     public static Boolean isStreamOnline = false;
 
     public static ReadWriteLock channelLock = new ReentrantReadWriteLock();
-    public static Long          channelId;
+    public static Long          channelId = 0L;
     public static String        channelDisplayName;
 
     public static ReadWriteLock streamLock = new ReentrantReadWriteLock();
