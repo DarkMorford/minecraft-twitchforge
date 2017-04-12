@@ -2,14 +2,13 @@ package net.darkmorford.twitchforge;
 
 import net.darkmorford.twitchforge.command.CommandMain;
 import net.darkmorford.twitchforge.proxy.CommonProxy;
+import net.darkmorford.twitchforge.task.TaskGetUserId;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.event.*;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = TwitchForge.MODID, name = TwitchForge.MODNAME, version = TwitchForge.VERSION, useMetadata = true)
@@ -62,5 +61,13 @@ public class TwitchForge
         // Register commands
 
         event.registerServerCommand(new CommandMain());
+    }
+
+    @EventHandler
+    public void serverAboutToStart(FMLServerAboutToStartEvent event)
+    {
+        logger.log(Level.INFO, "Fetching Twitch channel ID");
+        Thread t = new Thread(new TaskGetUserId());
+        t.start();
     }
 }
