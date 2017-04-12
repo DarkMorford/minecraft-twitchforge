@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.event.*;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = TwitchForge.MODID, name = TwitchForge.MODNAME, version = TwitchForge.VERSION, useMetadata = true)
+@Mod(modid = TwitchForge.MODID, name = TwitchForge.MODNAME, version = TwitchForge.VERSION, useMetadata = true, acceptableRemoteVersions = "*")
 public class TwitchForge
 {
     public static final String MODID = "twitchforge";
@@ -55,19 +55,19 @@ public class TwitchForge
     }
 
     @EventHandler
-    public void serverStart(FMLServerStartingEvent event)
-    {
-        // Sample things to do in this event handler:
-        // Register commands
-
-        event.registerServerCommand(new CommandMain());
-    }
-
-    @EventHandler
     public void serverAboutToStart(FMLServerAboutToStartEvent event)
     {
         logger.log(Level.INFO, "Fetching Twitch channel ID");
         Thread t = new Thread(new TaskGetUserId());
         t.start();
+    }
+
+    @EventHandler
+    public void serverStarting(FMLServerStartingEvent event)
+    {
+        // Sample things to do in this event handler:
+        // Register commands
+
+        event.registerServerCommand(new CommandMain());
     }
 }
