@@ -3,3 +3,7 @@
 # Items
 
 # Commands
+
+# Statuses
+stream.offline=The %1$s channel is currently §4offline§r.
+stream.online=%1$s is currently streaming §a"%2$s"§r!

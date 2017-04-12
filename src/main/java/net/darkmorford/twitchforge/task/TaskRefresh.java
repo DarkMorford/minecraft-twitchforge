@@ -7,6 +7,8 @@ import net.darkmorford.twitchforge.TwitchForge;
 import net.darkmorford.twitchforge.twitch.Stream;
 import net.darkmorford.twitchforge.twitch.TwitchState;
 import net.darkmorford.twitchforge.utils.InstantDeserializer;
+import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -29,6 +31,7 @@ public class TaskRefresh implements Runnable
         // Build the URI for the data we want
         TwitchState.channelLock.readLock().lock();
         Long channelId = TwitchState.channelId;
+        String channelName = TwitchState.channelDisplayName;
         TwitchState.channelLock.readLock().unlock();
 
         if (channelId == 0L)
@@ -64,6 +67,9 @@ public class TaskRefresh implements Runnable
             if (streamStatus._id == null)
             {
                 TwitchState.isStreamOnline = false;
+
+                FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList()
+                        .sendChatMsg(new TextComponentTranslation("twitchforge:stream.offline", channelName));
             }
             else
             {
@@ -79,6 +85,9 @@ public class TaskRefresh implements Runnable
                 TwitchState.streamStartTime = streamStatus.created_at;
                 TwitchState.streamTitle = streamStatus.channel.status;
                 TwitchState.streamUri = streamStatus.channel.url;
+
+                FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList()
+                        .sendChatMsg(new TextComponentTranslation("twitchforge:stream.online", channelName, streamStatus.channel.status));
             }
         }
         catch (IOException e)
