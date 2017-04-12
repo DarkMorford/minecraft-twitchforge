@@ -1,9 +1,6 @@
 package net.darkmorford.twitchforge.task;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import net.darkmorford.twitchforge.Config;
 import net.darkmorford.twitchforge.TwitchForge;
 import net.darkmorford.twitchforge.twitch.TwitchState;
@@ -27,6 +24,9 @@ public class TaskGetUserId implements Runnable
     public void run()
     {
         // https://dev.twitch.tv/docs/v5/guides/using-the-twitch-api/
+
+        // Lock the channel information until we have a chance to update it
+        TwitchState.channelLock.writeLock().lock();
 
         // Build the URI for the data we want
         String twitchEndpoint = String.format("https://api.twitch.tv/kraken/users?login=%s", Config.twitchChannel);
@@ -60,6 +60,14 @@ public class TaskGetUserId implements Runnable
         catch (IOException e)
         {
             TwitchForge.logger.log(Level.ERROR, e.getMessage());
+        }
+        catch (JsonSyntaxException e)
+        {
+        }
+        finally
+        {
+            // Make sure this gets unlocked so other functions can use it
+            TwitchState.channelLock.writeLock().unlock();
         }
     }
 }

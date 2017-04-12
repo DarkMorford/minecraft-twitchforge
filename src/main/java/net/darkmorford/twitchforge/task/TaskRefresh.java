@@ -2,6 +2,7 @@ package net.darkmorford.twitchforge.task;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 import net.darkmorford.twitchforge.TwitchForge;
 import net.darkmorford.twitchforge.twitch.Stream;
 import net.darkmorford.twitchforge.twitch.TwitchState;
@@ -26,12 +27,17 @@ public class TaskRefresh implements Runnable
         // https://dev.twitch.tv/docs/v5/reference/streams/
 
         // Build the URI for the data we want
+        TwitchState.channelLock.readLock().lock();
         String twitchEndpoint = String.format("https://api.twitch.tv/kraken/streams/%d", TwitchState.channelId);
+        TwitchState.channelLock.readLock().unlock();
 
         // Create a request object and set necessary headers
         HttpGet request = new HttpGet(twitchEndpoint);
         request.addHeader("Accept", "application/vnd.twitchtv.v5+json");
         request.addHeader("Client-ID", TwitchState.twitchApiKey);
+
+        // Lock the stream data while the request is in progress
+        TwitchState.streamLock.writeLock().lock();
 
         // Create an HTTP client for the transaction
         CloseableHttpClient client = HttpClients.createDefault();
@@ -66,6 +72,13 @@ public class TaskRefresh implements Runnable
         catch (IOException e)
         {
             TwitchForge.logger.log(Level.ERROR, e.getMessage());
+        }
+        catch (JsonSyntaxException e)
+        {
+        }
+        finally
+        {
+            TwitchState.streamLock.writeLock().unlock();
         }
     }
 }
