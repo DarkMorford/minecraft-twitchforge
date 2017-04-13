@@ -69,7 +69,7 @@ public class TaskRefresh implements Runnable
                 TwitchState.isStreamOnline = false;
 
                 FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList()
-                        .sendChatMsg(new TextComponentTranslation("twitchforge:stream.offline", channelName));
+                        .sendChatMsg(new TextComponentTranslation("stream.offline", channelName));
             }
             else
             {
@@ -87,7 +87,7 @@ public class TaskRefresh implements Runnable
                 TwitchState.streamUri = streamStatus.channel.url;
 
                 FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList()
-                        .sendChatMsg(new TextComponentTranslation("twitchforge:stream.online", channelName, streamStatus.channel.status));
+                        .sendChatMsg(new TextComponentTranslation("stream.online", channelName, streamStatus.channel.status));
             }
         }
         catch (IOException e)
