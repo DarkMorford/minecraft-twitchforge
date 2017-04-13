@@ -60,8 +60,8 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
-    shade 'com.google.code.gson:gson:2.8.0'
-    shade 'org.apache.httpcomponents:httpclient:4.5.3'
+    // shade 'com.google.code.gson:gson:2.8.0'
+    // shade 'org.apache.httpcomponents:httpclient:4.5.3'
 }
 
 jar {
@@ -92,8 +92,8 @@ processResources {
 }
 
 reobf {
-	jar {
-		extraLines "PK: org/apache/httpcomponents net/darkmorford/apache/httpcomponents"
-		extraLines "PK: com/google/code/gson net/darkmorford/google/code/gson"
-	}
+    jar {
+        // extraLines "PK: org/apache/http net/darkmorford/apache/http"
+        // extraLines "PK: com/google/code/gson net/darkmorford/google/code/gson"
+    }
 }
