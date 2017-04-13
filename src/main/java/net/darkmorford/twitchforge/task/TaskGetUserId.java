@@ -6,16 +6,12 @@ import net.darkmorford.twitchforge.TwitchForge;
 import net.darkmorford.twitchforge.twitch.TwitchState;
 import net.darkmorford.twitchforge.twitch.User;
 import net.darkmorford.twitchforge.utils.InstantDeserializer;
-import org.apache.commons.io.IOUtils;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.apache.logging.log4j.Level;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 
 public class TaskGetUserId implements Runnable
@@ -32,24 +28,20 @@ public class TaskGetUserId implements Runnable
         String twitchEndpoint = String.format("https://api.twitch.tv/kraken/users?login=%s", Config.twitchChannel);
 
         // Create a request object and set necessary headers
-        HttpGet request = new HttpGet(twitchEndpoint);
-        request.addHeader("Accept", "application/vnd.twitchtv.v5+json");
-        request.addHeader("Client-ID", TwitchState.twitchApiKey);
+        Request request = new Request.Builder()
+                .url(twitchEndpoint)
+                .header("Accept", "application/vnd.twitchtv.v5+json")
+                .header("Client-ID", TwitchState.twitchApiKey)
+                .build();
 
         // Create an HTTP client for the transaction
-        CloseableHttpClient client = HttpClients.createDefault();
-        try (CloseableHttpResponse response = client.execute(request))
+        OkHttpClient client = new OkHttpClient();
+        try (Response response = client.newCall(request).execute())
         {
-            // Perform the network request
-            HttpEntity responseBody = response.getEntity();
-
-            // Get the JSON string from the response
-            String responseString = IOUtils.toString(responseBody.getContent(), StandardCharsets.UTF_8);
-
-            // Convert the JSON into data objects
+            // Convert the JSON response into data objects
             Gson gson = new GsonBuilder().registerTypeAdapter(Instant.class, new InstantDeserializer()).create();
             JsonParser jParser = new JsonParser();
-            JsonObject rootObj = jParser.parse(responseString).getAsJsonObject();
+            JsonObject rootObj = jParser.parse(response.body().charStream()).getAsJsonObject();
 
             User[] users = gson.fromJson(rootObj.get("users"), User[].class);
 
@@ -63,6 +55,7 @@ public class TaskGetUserId implements Runnable
         }
         catch (JsonSyntaxException e)
         {
+            TwitchForge.logger.log(Level.ERROR, e.getMessage());
         }
         finally
         {

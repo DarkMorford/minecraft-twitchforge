@@ -9,16 +9,12 @@ import net.darkmorford.twitchforge.twitch.TwitchState;
 import net.darkmorford.twitchforge.utils.InstantDeserializer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
-import org.apache.commons.io.IOUtils;
-import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.apache.logging.log4j.Level;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 
 public class TaskRefresh implements Runnable
@@ -43,26 +39,22 @@ public class TaskRefresh implements Runnable
         String twitchEndpoint = String.format("https://api.twitch.tv/kraken/streams/%d", channelId);
 
         // Create a request object and set necessary headers
-        HttpGet request = new HttpGet(twitchEndpoint);
-        request.addHeader("Accept", "application/vnd.twitchtv.v5+json");
-        request.addHeader("Client-ID", TwitchState.twitchApiKey);
+        Request request = new Request.Builder()
+                .url(twitchEndpoint)
+                .header("Accept", "application/vnd.twitchtv.v5+json")
+                .header("Client-ID", TwitchState.twitchApiKey)
+                .build();
 
         // Lock the stream data while the request is in progress
         TwitchState.streamLock.writeLock().lock();
 
         // Create an HTTP client for the transaction
-        CloseableHttpClient client = HttpClients.createDefault();
-        try (CloseableHttpResponse response = client.execute(request))
+        OkHttpClient client = new OkHttpClient();
+        try (Response response = client.newCall(request).execute())
         {
-            // Get the response body
-            HttpEntity responseBody = response.getEntity();
-
-            // Get the JSON string from the response
-            String responseString = IOUtils.toString(responseBody.getContent(), StandardCharsets.UTF_8);
-
-            // Convert the JSON a data object
+            // Convert the JSON response into a data object
             Gson gson = new GsonBuilder().registerTypeAdapter(Instant.class, new InstantDeserializer()).create();
-            Stream streamStatus = gson.fromJson(responseString, Stream.class);
+            Stream streamStatus = gson.fromJson(response.body().charStream(), Stream.class);
 
             if (streamStatus._id == null)
             {
@@ -96,6 +88,7 @@ public class TaskRefresh implements Runnable
         }
         catch (JsonSyntaxException e)
         {
+            TwitchForge.logger.log(Level.ERROR, e.getMessage());
         }
         finally
         {
