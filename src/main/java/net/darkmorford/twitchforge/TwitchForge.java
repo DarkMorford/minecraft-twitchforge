@@ -16,7 +16,7 @@ public class TwitchForge
 {
     public static final String MODID = "twitchforge";
     public static final String MODNAME = "TwitchForge";
-    public static final String VERSION = "1.10.2-0.0.1.0";
+    public static final String VERSION = "1.10.2-0.0.1.1";
 
     @SidedProxy(clientSide = "net.darkmorford.twitchforge.proxy.ClientProxy", serverSide = "net.darkmorford.twitchforge.proxy.ServerProxy")
     public static CommonProxy proxy;
