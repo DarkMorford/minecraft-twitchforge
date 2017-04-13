@@ -1,8 +1,6 @@
 package net.darkmorford.twitchforge.task;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonSyntaxException;
+import com.google.gson.*;
 import net.darkmorford.twitchforge.TwitchForge;
 import net.darkmorford.twitchforge.twitch.Stream;
 import net.darkmorford.twitchforge.twitch.TwitchState;
@@ -54,7 +52,10 @@ public class TaskRefresh implements Runnable
         {
             // Convert the JSON response into a data object
             Gson gson = new GsonBuilder().registerTypeAdapter(Instant.class, new InstantDeserializer()).create();
-            Stream streamStatus = gson.fromJson(response.body().charStream(), Stream.class);
+            JsonParser jParser = new JsonParser();
+            JsonObject rootObj = jParser.parse(response.body().charStream()).getAsJsonObject();
+
+            Stream streamStatus = gson.fromJson(rootObj.get("stream"), Stream.class);
 
             if (streamStatus._id == null)
             {
