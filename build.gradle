@@ -60,7 +60,7 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
-	shade 'com.squareup.okhttp3:okhttp:3.6.0'
+    shade 'com.squareup.okhttp3:okhttp:3.6.0'
 }
 
 jar {
@@ -92,6 +92,7 @@ processResources {
 
 reobf {
     jar {
-		extraLines "PK: okhttp3 net/darkmorford/okhttp3"
+        extraLines "PK: okhttp3 net/darkmorford/okhttp3"
+        extraLines "PK: okio net/darkmorford/okio"
     }
 }
