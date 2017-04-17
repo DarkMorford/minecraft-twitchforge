@@ -57,7 +57,7 @@ public class TaskRefresh implements Runnable
 
             Stream streamStatus = gson.fromJson(rootObj.get("stream"), Stream.class);
 
-            if (streamStatus._id == null)
+            if (streamStatus == null)
             {
                 TwitchState.isStreamOnline = false;
 
