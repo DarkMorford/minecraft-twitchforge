@@ -27,7 +27,7 @@ public class CommandMain extends CommandBase
     @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException
     {
-        if (!server.getEntityWorld().isRemote)
+        if (!sender.getEntityWorld().isRemote)
         {
             TwitchForge.logger.log(Level.INFO, "Starting refresh thread");
             Thread t = new Thread(new TaskRefresh());
