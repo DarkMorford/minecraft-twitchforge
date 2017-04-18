@@ -5,10 +5,14 @@ import net.darkmorford.twitchforge.task.TaskRefresh;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.command.WrongUsageException;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.TextComponentString;
 import net.minecraft.util.text.TextFormatting;
 import org.apache.logging.log4j.Level;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class CommandMain extends CommandBase
 {
@@ -27,6 +31,13 @@ public class CommandMain extends CommandBase
     @Override
     public void execute(MinecraftServer server, ICommandSender sender, String[] args) throws CommandException
     {
+        // Check to make sure we got a subcommand
+        if (args.length == 0)
+            throw new WrongUsageException("commands.generic.usage", getCommandUsage(sender));
+
+        String subcommand = args[0];
+        List<String> subArgs = Arrays.asList(args).subList(1, args.length);
+
         if (!server.getEntityWorld().isRemote)
         {
             TwitchForge.logger.log(Level.INFO, "Starting refresh thread");
