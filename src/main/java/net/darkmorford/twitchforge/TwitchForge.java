@@ -54,6 +54,8 @@ public class TwitchForge
         // Register world generators, register recipes, register event handlers, send IMC messages
 
         proxy.init(event);
+
+        PacketHandler.registerMessages();
     }
 
     @EventHandler
