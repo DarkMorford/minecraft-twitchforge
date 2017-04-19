@@ -1,5 +1,6 @@
 package net.darkmorford.twitchforge.command;
 
+import com.google.common.collect.Lists;
 import net.darkmorford.twitchforge.TwitchForge;
 import net.darkmorford.twitchforge.task.TaskRefresh;
 import net.minecraft.command.CommandBase;
@@ -16,6 +17,13 @@ import java.util.List;
 
 public class CommandMain extends CommandBase
 {
+    private final List<String> aliases;
+
+    public CommandMain()
+    {
+        aliases = Lists.newArrayList(TwitchForge.MODID, "tf");
+    }
+
     @Override
     public String getCommandName()
     {
@@ -23,9 +31,15 @@ public class CommandMain extends CommandBase
     }
 
     @Override
+    public List<String> getCommandAliases()
+    {
+        return aliases;
+    }
+
+    @Override
     public String getCommandUsage(ICommandSender sender)
     {
-        return "/twitchforge";
+        return "/twitchforge refresh";
     }
 
     @Override
