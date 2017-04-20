@@ -3,6 +3,9 @@ package net.darkmorford.twitchforge;
 import net.darkmorford.twitchforge.command.CommandMain;
 import net.darkmorford.twitchforge.proxy.CommonProxy;
 import net.darkmorford.twitchforge.task.TaskGetUserId;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
@@ -26,6 +29,14 @@ public class TwitchForge
 
     public static Logger logger;
 
+    // Custom creative tabs
+    public static final CreativeTabs tabTwitchForge = new CreativeTabs("twitchforge") {
+        @Override
+        public Item getTabIconItem() {
+            return Items.DIAMOND_SHOVEL;
+        }
+    };
+
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
@@ -43,6 +54,8 @@ public class TwitchForge
         // Register world generators, register recipes, register event handlers, send IMC messages
 
         proxy.init(event);
+
+        PacketHandler.registerMessages();
     }
 
     @EventHandler
