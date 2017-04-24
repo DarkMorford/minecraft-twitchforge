@@ -5,5 +5,8 @@ jdk:
 before_install:
   - chmod +x gradlew
 
+install:
+  - ./gradlew setupCiWorkspace
+
 script:
   - ./gradlew build
