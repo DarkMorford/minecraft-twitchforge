@@ -10,25 +10,38 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 public class MessageStreamStatus implements IMessage
 {
     private boolean streamOnline;
+    private String  streamTitle;
 
     public MessageStreamStatus()
     {
-        this.streamOnline = false;
+        this(false, "");
     }
 
     public MessageStreamStatus(boolean streamOnline)
     {
+        this(streamOnline, "");
+    }
+
+    public MessageStreamStatus(boolean streamOnline, String streamTitle)
+    {
         this.streamOnline = streamOnline;
+        this.streamTitle  = streamTitle;
     }
 
     @Override
     public void fromBytes(ByteBuf buf) {
         streamOnline = buf.readBoolean();
+
+        int titleLength = buf.readInt();
+        streamTitle = buf.readBytes(titleLength).toString();
     }
 
     @Override
     public void toBytes(ByteBuf buf) {
         buf.writeBoolean(streamOnline);
+
+        buf.writeInt(streamTitle.length());
+        buf.writeBytes(streamTitle.getBytes());
     }
 
     public static class Handler implements IMessageHandler<MessageStreamStatus, IMessage>
@@ -46,6 +59,7 @@ public class MessageStreamStatus implements IMessage
         private void handle(MessageStreamStatus message, MessageContext ctx)
         {
             TwitchState.isStreamOnline = message.streamOnline;
+            TwitchState.streamTitle = message.streamTitle;
         }
     }
 }
