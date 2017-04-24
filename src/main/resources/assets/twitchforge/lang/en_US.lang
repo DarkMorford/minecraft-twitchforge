@@ -10,3 +10,6 @@ stream.online=%1$s is currently streaming "%2$s"!
 
 # Creative Tabs
 itemGroup.twitchforge=TwitchForge
+
+# Miscellaneous strings
+misc.motd=Welcome to the TwitchForge test server, %1$s!

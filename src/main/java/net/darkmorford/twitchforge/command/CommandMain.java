@@ -52,7 +52,7 @@ public class CommandMain extends CommandBase
         String subcommand = args[0];
         List<String> subArgs = Arrays.asList(args).subList(1, args.length);
 
-        if (!server.getEntityWorld().isRemote)
+        if (!sender.getEntityWorld().isRemote)
         {
             TwitchForge.logger.log(Level.INFO, "Starting refresh thread");
             Thread t = new Thread(new TaskRefresh());
