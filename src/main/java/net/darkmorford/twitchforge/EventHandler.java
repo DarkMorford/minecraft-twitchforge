@@ -1,7 +1,9 @@
 package net.darkmorford.twitchforge;
 
+import net.darkmorford.twitchforge.proxy.CommonProxy;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.PlayerEvent;
@@ -18,5 +20,15 @@ public class EventHandler
 
         // Send them a welcome message
         player.addChatComponentMessage(new TextComponentTranslation("misc.motd", playerName));
+    }
+
+    @SubscribeEvent
+    public static void configChanged(ConfigChangedEvent.OnConfigChangedEvent event)
+    {
+        if (event.getModID().equals(TwitchForge.MODID))
+        {
+            if (CommonProxy.config.hasChanged())
+                CommonProxy.config.save();
+        }
     }
 }

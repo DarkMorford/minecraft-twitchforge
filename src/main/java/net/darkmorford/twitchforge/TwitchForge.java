@@ -14,7 +14,14 @@ import net.minecraftforge.fml.common.event.*;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = TwitchForge.MODID, name = TwitchForge.MODNAME, version = TwitchForge.VERSION, useMetadata = true, acceptableRemoteVersions = "*")
+@Mod(
+        modid = TwitchForge.MODID,
+        name = TwitchForge.MODNAME,
+        version = TwitchForge.VERSION,
+        useMetadata = true,
+        guiFactory = "net.darkmorford.twitchforge.gui.GuiConfigFactory",
+        acceptableRemoteVersions = "*"
+)
 public class TwitchForge
 {
     public static final String MODID = "twitchforge";

@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Level;
 public class Config
 {
     // Configuration categories
-    private static final String CATEGORY_GENERAL = "general";
+    public static final String CATEGORY_GENERAL = "general";
 
     // General configuration values
     public static String twitchChannel = "minecraft";
