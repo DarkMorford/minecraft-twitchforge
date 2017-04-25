@@ -1,5 +1,8 @@
 package net.darkmorford.twitchforge.twitch;
 
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
+
 import java.net.URI;
 import java.time.Instant;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -20,4 +23,28 @@ public class TwitchState
     public static Instant       streamStartTime;
     public static String        streamTitle;
     public static URI           streamUri;
+
+    public static ITextComponent getStatusString()
+    {
+        // Make a copy of the channel name for display
+        channelLock.readLock().lock();
+        String channelName = channelDisplayName;
+        channelLock.readLock().unlock();
+
+        if (isStreamOnline)
+        {
+            // Copy the stream title
+            streamLock.readLock().lock();
+            String streamName = streamTitle;
+            streamLock.readLock().unlock();
+
+            // Send the "online" message
+            return new TextComponentTranslation("stream.online", channelName, streamName);
+        }
+        else
+        {
+            // Send the "offline" message
+            return new TextComponentTranslation("stream.offline", channelName);
+        }
+    }
 }
