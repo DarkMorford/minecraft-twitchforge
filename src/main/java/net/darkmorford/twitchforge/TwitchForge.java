@@ -1,16 +1,21 @@
 package net.darkmorford.twitchforge;
 
 import net.darkmorford.twitchforge.command.CommandMain;
+import net.darkmorford.twitchforge.item.ModItems;
 import net.darkmorford.twitchforge.proxy.CommonProxy;
 import net.darkmorford.twitchforge.task.TaskGetUserId;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.EnumDyeColor;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
@@ -63,6 +68,16 @@ public class TwitchForge
         proxy.init(event);
 
         PacketHandler.registerMessages();
+
+        final int PURPLE_DYE_VALUE = EnumDyeColor.PURPLE.getDyeDamage();
+        final int WHITE_DYE_VALUE = EnumDyeColor.WHITE.getDyeDamage();
+        GameRegistry.addRecipe(new ItemStack(ModItems.glitch),
+                "PWP",
+                "WEW",
+                "PWP",
+                'P', new ItemStack(Blocks.WOOL, 1, PURPLE_DYE_VALUE),
+                'W', new ItemStack(Blocks.WOOL, 1, WHITE_DYE_VALUE),
+                'E', Items.ENDER_PEARL);
     }
 
     @EventHandler
