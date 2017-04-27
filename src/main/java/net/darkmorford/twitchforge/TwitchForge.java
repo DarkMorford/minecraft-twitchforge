@@ -3,6 +3,7 @@ package net.darkmorford.twitchforge;
 import net.darkmorford.twitchforge.command.CommandMain;
 import net.darkmorford.twitchforge.proxy.CommonProxy;
 import net.darkmorford.twitchforge.task.TaskGetUserId;
+import net.darkmorford.twitchforge.task.TaskRefresh;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -13,6 +14,10 @@ import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
+
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @Mod(
         modid = TwitchForge.MODID,
@@ -89,5 +94,9 @@ public class TwitchForge
         // Register commands
 
         event.registerServerCommand(new CommandMain());
+
+        // Schedule the refresh task to run every 5 minutes
+        final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+        executorService.scheduleAtFixedRate(new TaskRefresh(), 1, 5, TimeUnit.MINUTES);
     }
 }
