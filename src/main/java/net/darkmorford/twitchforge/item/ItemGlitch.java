@@ -11,7 +11,7 @@ public class ItemGlitch extends Item
 {
     public ItemGlitch()
     {
-        setRegistryName("glitch");
+        setRegistryName(TwitchForge.MODID + ":glitch");
         setUnlocalizedName(TwitchForge.MODID + ".glitch");
         this.setCreativeTab(TwitchForge.tabTwitchForge);
     }

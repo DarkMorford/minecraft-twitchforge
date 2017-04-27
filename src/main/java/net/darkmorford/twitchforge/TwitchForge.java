@@ -45,7 +45,7 @@ public class TwitchForge
     public static final CreativeTabs tabTwitchForge = new CreativeTabs("twitchforge") {
         @Override
         public Item getTabIconItem() {
-            return Items.DIAMOND_SHOVEL;
+            return ModItems.glitch;
         }
     };
 
@@ -69,8 +69,8 @@ public class TwitchForge
 
         PacketHandler.registerMessages();
 
-        final int PURPLE_DYE_VALUE = EnumDyeColor.PURPLE.getDyeDamage();
-        final int WHITE_DYE_VALUE = EnumDyeColor.WHITE.getDyeDamage();
+        final int PURPLE_DYE_VALUE = EnumDyeColor.PURPLE.getMetadata();
+        final int WHITE_DYE_VALUE = EnumDyeColor.WHITE.getMetadata();
         GameRegistry.addRecipe(new ItemStack(ModItems.glitch),
                 "PWP",
                 "WEW",
