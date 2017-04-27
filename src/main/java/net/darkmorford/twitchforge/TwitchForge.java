@@ -24,8 +24,7 @@ import org.apache.logging.log4j.Logger;
         name = TwitchForge.MODNAME,
         version = TwitchForge.VERSION,
         useMetadata = true,
-        guiFactory = "net.darkmorford.twitchforge.gui.GuiConfigFactory",
-        acceptableRemoteVersions = "*"
+        guiFactory = "net.darkmorford.twitchforge.gui.GuiConfigFactory"
 )
 public class TwitchForge
 {
