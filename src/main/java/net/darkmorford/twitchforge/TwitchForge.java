@@ -95,8 +95,8 @@ public class TwitchForge
 
         event.registerServerCommand(new CommandMain());
 
-        // Schedule the refresh task to run every 5 minutes
+        // Schedule the refresh task to run every few minutes
         final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-        executorService.scheduleAtFixedRate(new TaskRefresh(), 1, 5, TimeUnit.MINUTES);
+        executorService.scheduleAtFixedRate(new TaskRefresh(), 1, Config.updateInterval, TimeUnit.MINUTES);
     }
 }
