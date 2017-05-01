@@ -1,7 +1,9 @@
 package net.darkmorford.twitchforge.task;
 
 import com.google.gson.*;
+import net.darkmorford.twitchforge.PacketHandler;
 import net.darkmorford.twitchforge.TwitchForge;
+import net.darkmorford.twitchforge.message.MessageStreamStatus;
 import net.darkmorford.twitchforge.twitch.Stream;
 import net.darkmorford.twitchforge.twitch.TwitchState;
 import net.darkmorford.twitchforge.utils.InstantDeserializer;
@@ -63,6 +65,8 @@ public class TaskRefresh implements Runnable
 
                 FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList()
                         .sendChatMsg(new TextComponentTranslation("stream.offline", channelName));
+
+                PacketHandler.INSTANCE.sendToAll(new MessageStreamStatus(false));
             }
             else
             {
@@ -81,6 +85,8 @@ public class TaskRefresh implements Runnable
 
                 FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList()
                         .sendChatMsg(new TextComponentTranslation("stream.online", channelName, streamStatus.channel.status));
+
+                PacketHandler.INSTANCE.sendToAll(new MessageStreamStatus(true, TwitchState.streamTitle));
             }
         }
         catch (IOException e)
