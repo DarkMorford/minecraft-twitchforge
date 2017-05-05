@@ -1,5 +1,6 @@
 package net.darkmorford.twitchforge.proxy;
 
+import net.darkmorford.twitchforge.block.ModBlocks;
 import net.darkmorford.twitchforge.item.ModItems;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
@@ -10,6 +11,7 @@ public class ClientProxy extends CommonProxy
     {
         super.preInit(event);
 
+        ModBlocks.initModels();
         ModItems.initModels();
     }
 }
