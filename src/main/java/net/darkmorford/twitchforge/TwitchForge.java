@@ -1,5 +1,6 @@
 package net.darkmorford.twitchforge;
 
+import net.darkmorford.twitchforge.block.ModBlocks;
 import net.darkmorford.twitchforge.command.CommandMain;
 import net.darkmorford.twitchforge.item.ModItems;
 import net.darkmorford.twitchforge.proxy.CommonProxy;
@@ -77,6 +78,13 @@ public class TwitchForge
                 'P', new ItemStack(Blocks.WOOL, 1, PURPLE_DYE_VALUE),
                 'W', new ItemStack(Blocks.WOOL, 1, WHITE_DYE_VALUE),
                 'E', Items.ENDER_PEARL);
+
+        GameRegistry.addRecipe(new ItemStack(ModBlocks.streamDetector),
+                "RRR",
+                "RGR",
+                "RRR",
+                'R', Items.REDSTONE,
+                'G', ModItems.glitch);
     }
 
     @EventHandler
