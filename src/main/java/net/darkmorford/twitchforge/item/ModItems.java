@@ -35,6 +35,8 @@ public class ModItems
         event.getRegistry().register(new ItemGlitch());
 
         // ItemBlocks
-        event.getRegistry().register(new ItemBlock(ModBlocks.streamDetector));
+        event.getRegistry().register(new ItemBlock(ModBlocks.streamDetector)
+                .setRegistryName("twitchforge:streamDetector")
+                .setCreativeTab(TwitchForge.tabTwitchForge));
     }
 }

@@ -1,5 +1,5 @@
 # Blocks
-tile.streamDetector.name=Stream Detector
+tile.twitchforge.streamDetector.name=Stream Detector
 
 # Items
 item.twitchforge.glitch.name=Glitch
