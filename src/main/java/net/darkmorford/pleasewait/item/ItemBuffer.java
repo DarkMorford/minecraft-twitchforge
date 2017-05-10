@@ -11,12 +11,12 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.List;
 
-public class ItemGlitch extends Item
+public class ItemBuffer extends Item
 {
-    public ItemGlitch()
+    public ItemBuffer()
     {
-        setRegistryName(PleaseWait.MODID + ":glitch");
-        setUnlocalizedName(PleaseWait.MODID + ".glitch");
+        setRegistryName(PleaseWait.MODID + ":buffer");
+        setUnlocalizedName("buffer");
         setCreativeTab(PleaseWait.tabPleaseWait);
     }
 

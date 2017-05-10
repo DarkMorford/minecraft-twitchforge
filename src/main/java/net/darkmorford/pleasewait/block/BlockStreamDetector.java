@@ -10,14 +10,14 @@ import net.minecraftforge.client.model.ModelLoader;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-public class BlockDetector extends Block
+public class BlockStreamDetector extends Block
 {
-    public BlockDetector()
+    public BlockStreamDetector()
     {
         super(Material.ROCK);
 
         setRegistryName(PleaseWait.MODID + ":streamDetector");
-        setUnlocalizedName(PleaseWait.MODID + ".streamDetector");
+        setUnlocalizedName("streamDetector");
         setCreativeTab(PleaseWait.tabPleaseWait);
     }
 

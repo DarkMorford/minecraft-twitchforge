@@ -17,12 +17,12 @@ public class ModBlocks
     @SideOnly(Side.CLIENT)
     public static void initModels()
     {
-        ((BlockDetector)streamDetector).initModel();
+        ((BlockStreamDetector)streamDetector).initModel();
     }
 
     @SubscribeEvent
     public static void registerBlocks(RegistryEvent.Register<Block> event)
     {
-        event.getRegistry().register(new BlockDetector());
+        event.getRegistry().register(new BlockStreamDetector());
     }
 }

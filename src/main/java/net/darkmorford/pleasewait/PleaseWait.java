@@ -50,7 +50,7 @@ public class PleaseWait
     public static final CreativeTabs tabPleaseWait = new CreativeTabs("pleasewait") {
         @Override
         public Item getTabIconItem() {
-            return ModItems.glitch;
+            return ModItems.buffer;
         }
     };
 
@@ -76,7 +76,7 @@ public class PleaseWait
 
         final int PURPLE_DYE_VALUE = EnumDyeColor.PURPLE.getMetadata();
         final int WHITE_DYE_VALUE = EnumDyeColor.WHITE.getMetadata();
-        GameRegistry.addRecipe(new ItemStack(ModItems.glitch),
+        GameRegistry.addRecipe(new ItemStack(ModItems.buffer),
                 "PWP",
                 "WEW",
                 "PWP",
@@ -86,10 +86,10 @@ public class PleaseWait
 
         GameRegistry.addRecipe(new ItemStack(ModBlocks.streamDetector),
                 "RRR",
-                "RGR",
+                "RBR",
                 "RRR",
                 'R', Items.REDSTONE,
-                'G', ModItems.glitch);
+                'B', ModItems.buffer);
     }
 
     @EventHandler

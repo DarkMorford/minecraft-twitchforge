@@ -16,7 +16,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 public class ModItems
 {
     // Regular Items
-    public static final Item glitch = null;
+    public static final Item buffer = null;
 
     // ItemBlocks
     public static final Item streamDetector = null;
@@ -24,18 +24,18 @@ public class ModItems
     @SideOnly(Side.CLIENT)
     public static void initModels()
     {
-        ((ItemGlitch)glitch).initModel();
+        ((ItemBuffer) buffer).initModel();
     }
 
     @SubscribeEvent
     public static void registerItems(RegistryEvent.Register<Item> event)
     {
         // Regular Items
-        event.getRegistry().register(new ItemGlitch());
+        event.getRegistry().register(new ItemBuffer());
 
         // ItemBlocks
         event.getRegistry().register(new ItemBlock(ModBlocks.streamDetector)
-                .setRegistryName("pleasewait:streamDetector")
+                .setRegistryName(PleaseWait.MODID + ":streamDetector")
                 .setCreativeTab(PleaseWait.tabPleaseWait));
     }
 }

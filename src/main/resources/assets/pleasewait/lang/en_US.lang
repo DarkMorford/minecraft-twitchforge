@@ -1,8 +1,8 @@
 # Blocks
-tile.pleasewait.streamDetector.name=Stream Detector
+tile.streamDetector.name=Stream Detector
 
 # Items
-item.pleasewait.glitch.name=Glitch
+item.buffer.name=Buffer
 
 # Commands
 
