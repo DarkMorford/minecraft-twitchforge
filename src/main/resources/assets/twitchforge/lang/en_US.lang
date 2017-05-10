@@ -9,7 +9,7 @@ stream.offline=The %1$s channel is currently offline.
 stream.online=%1$s is currently streaming "%2$s"!
 
 # Creative Tabs
-itemGroup.twitchforge=TwitchForge
+itemGroup.pleasewait=Please Wait...
 
 # Miscellaneous strings
-misc.motd=Welcome to the TwitchForge test server, %1$s!
+misc.motd=Welcome to the Please Wait test server, %1$s!

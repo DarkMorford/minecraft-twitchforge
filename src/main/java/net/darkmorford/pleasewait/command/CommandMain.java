@@ -1,8 +1,8 @@
-package net.darkmorford.twitchforge.command;
+package net.darkmorford.pleasewait.command;
 
 import com.google.common.collect.Lists;
-import net.darkmorford.twitchforge.TwitchForge;
-import net.darkmorford.twitchforge.task.TaskRefresh;
+import net.darkmorford.pleasewait.PleaseWait;
+import net.darkmorford.pleasewait.task.TaskRefresh;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
@@ -21,13 +21,13 @@ public class CommandMain extends CommandBase
 
     public CommandMain()
     {
-        aliases = Lists.newArrayList(TwitchForge.MODID, "tf");
+        aliases = Lists.newArrayList(PleaseWait.MODID, "pw");
     }
 
     @Override
     public String getCommandName()
     {
-        return "twitchforge";
+        return "pleasewait";
     }
 
     @Override
@@ -39,7 +39,7 @@ public class CommandMain extends CommandBase
     @Override
     public String getCommandUsage(ICommandSender sender)
     {
-        return "/twitchforge refresh";
+        return "/pleasewait refresh";
     }
 
     @Override
@@ -54,7 +54,7 @@ public class CommandMain extends CommandBase
 
         if (!sender.getEntityWorld().isRemote)
         {
-            TwitchForge.logger.log(Level.INFO, "Starting refresh thread");
+            PleaseWait.logger.log(Level.INFO, "Starting refresh thread");
             Thread t = new Thread(new TaskRefresh());
             t.start();
         }

@@ -1,8 +1,8 @@
-# TwitchForge
+# Please Wait...
 
 ## Overview
 
-TwitchForge is a mod for Minecraft that provides integration with twitch.tv.
+Please Wait is a mod for Minecraft that provides integration with twitch.tv.
 The mod monitors a Twitch channel at a configurable interval (by default 5
 minutes) and affects the game world according to the information available
 about that channel. For example, when it notices that the channel has started
@@ -30,5 +30,5 @@ None yet!
 
 ## License
 
-TwitchForge is licensed according to the MIT license, which you can find in
+Please Wait is licensed according to the MIT license, which you can find in
 the LICENSE file.

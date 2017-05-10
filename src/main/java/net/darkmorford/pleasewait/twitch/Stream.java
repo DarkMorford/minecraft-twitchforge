@@ -1,4 +1,4 @@
-package net.darkmorford.twitchforge.twitch;
+package net.darkmorford.pleasewait.twitch;
 
 import java.time.Instant;
 

@@ -1,7 +1,7 @@
-package net.darkmorford.twitchforge.message;
+package net.darkmorford.pleasewait.message;
 
 import io.netty.buffer.ByteBuf;
-import net.darkmorford.twitchforge.twitch.TwitchState;
+import net.darkmorford.pleasewait.twitch.TwitchState;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessage;
 import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;

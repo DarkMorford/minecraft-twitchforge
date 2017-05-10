@@ -1,6 +1,6 @@
-package net.darkmorford.twitchforge;
+package net.darkmorford.pleasewait;
 
-import net.darkmorford.twitchforge.proxy.CommonProxy;
+import net.darkmorford.pleasewait.proxy.CommonProxy;
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.Level;
 
@@ -24,7 +24,7 @@ public class Config
         }
         catch (Exception e)
         {
-            TwitchForge.logger.log(Level.ERROR, "Problem loading config file!", e);
+            PleaseWait.logger.log(Level.ERROR, "Problem loading config file!", e);
         }
         finally
         {

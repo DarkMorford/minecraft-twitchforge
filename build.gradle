@@ -12,8 +12,8 @@ apply plugin: 'net.minecraftforge.gradle.forge'
 
 
 version = "1.10.2-0.0.1.5"
-group = "net.darkmorford.twitchforge" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "TwitchForge"
+group = "net.darkmorford.pleasewait" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "PleaseWait"
 
 sourceCompatibility = targetCompatibility = "1.8" // Need this here so eclipse task generates correctly.
 compileJava {

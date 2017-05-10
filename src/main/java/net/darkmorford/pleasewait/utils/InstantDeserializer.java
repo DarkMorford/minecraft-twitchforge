@@ -1,4 +1,4 @@
-package net.darkmorford.twitchforge.utils;
+package net.darkmorford.pleasewait.utils;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
