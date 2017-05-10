@@ -1,4 +1,4 @@
-package net.darkmorford.twitchforge.proxy;
+package net.darkmorford.pleasewait.proxy;
 
 public class ServerProxy extends CommonProxy
 {

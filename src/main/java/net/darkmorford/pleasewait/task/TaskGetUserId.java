@@ -1,11 +1,11 @@
-package net.darkmorford.twitchforge.task;
+package net.darkmorford.pleasewait.task;
 
 import com.google.gson.*;
-import net.darkmorford.twitchforge.Config;
-import net.darkmorford.twitchforge.TwitchForge;
-import net.darkmorford.twitchforge.twitch.TwitchState;
-import net.darkmorford.twitchforge.twitch.User;
-import net.darkmorford.twitchforge.utils.InstantDeserializer;
+import net.darkmorford.pleasewait.Config;
+import net.darkmorford.pleasewait.PleaseWait;
+import net.darkmorford.pleasewait.twitch.TwitchState;
+import net.darkmorford.pleasewait.twitch.User;
+import net.darkmorford.pleasewait.utils.InstantDeserializer;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -51,11 +51,11 @@ public class TaskGetUserId implements Runnable
         }
         catch (IOException e)
         {
-            TwitchForge.logger.log(Level.ERROR, e.getMessage());
+            PleaseWait.logger.log(Level.ERROR, e.getMessage());
         }
         catch (JsonSyntaxException e)
         {
-            TwitchForge.logger.log(Level.ERROR, e.getMessage());
+            PleaseWait.logger.log(Level.ERROR, e.getMessage());
         }
         finally
         {

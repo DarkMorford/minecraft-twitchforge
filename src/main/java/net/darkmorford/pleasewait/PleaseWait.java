@@ -1,10 +1,11 @@
-package net.darkmorford.twitchforge;
+package net.darkmorford.pleasewait;
 
+import net.darkmorford.pleasewait.command.CommandMain;
 import net.darkmorford.twitchforge.block.ModBlocks;
-import net.darkmorford.twitchforge.command.CommandMain;
+import net.darkmorford.pleasewait.proxy.CommonProxy;
 import net.darkmorford.twitchforge.item.ModItems;
-import net.darkmorford.twitchforge.proxy.CommonProxy;
-import net.darkmorford.twitchforge.task.TaskGetUserId;
+import net.darkmorford.pleasewait.task.TaskGetUserId;
+import net.darkmorford.pleasewait.task.TaskRefresh;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -20,29 +21,33 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.Logger;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 @Mod(
-        modid = TwitchForge.MODID,
-        name = TwitchForge.MODNAME,
-        version = TwitchForge.VERSION,
+        modid = PleaseWait.MODID,
+        name = PleaseWait.MODNAME,
+        version = PleaseWait.VERSION,
         useMetadata = true,
-        guiFactory = "net.darkmorford.twitchforge.gui.GuiConfigFactory"
+        guiFactory = "net.darkmorford.pleasewait.gui.GuiConfigFactory",
 )
-public class TwitchForge
+public class PleaseWait
 {
-    public static final String MODID = "twitchforge";
-    public static final String MODNAME = "TwitchForge";
+    public static final String MODID = "pleasewait";
+    public static final String MODNAME = "PleaseWait";
     public static final String VERSION = "1.10.2-0.0.1.5";
 
-    @SidedProxy(clientSide = "net.darkmorford.twitchforge.proxy.ClientProxy", serverSide = "net.darkmorford.twitchforge.proxy.ServerProxy")
+    @SidedProxy(clientSide = "net.darkmorford.pleasewait.proxy.ClientProxy", serverSide = "net.darkmorford.pleasewait.proxy.ServerProxy")
     public static CommonProxy proxy;
 
     @Instance
-    public static TwitchForge instance;
+    public static PleaseWait instance;
 
     public static Logger logger;
 
     // Custom creative tabs
-    public static final CreativeTabs tabTwitchForge = new CreativeTabs("twitchforge") {
+    public static final CreativeTabs tabTwitchForge = new CreativeTabs("pleasewait") {
         @Override
         public Item getTabIconItem() {
             return ModItems.glitch;
@@ -111,5 +116,9 @@ public class TwitchForge
         // Register commands
 
         event.registerServerCommand(new CommandMain());
+
+        // Schedule the refresh task to run every few minutes
+        final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+        executorService.scheduleAtFixedRate(new TaskRefresh(), 1, Config.updateInterval, TimeUnit.MINUTES);
     }
 }

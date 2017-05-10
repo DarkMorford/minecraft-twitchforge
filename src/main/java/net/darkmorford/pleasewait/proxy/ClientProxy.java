@@ -1,4 +1,4 @@
-package net.darkmorford.twitchforge.proxy;
+package net.darkmorford.pleasewait.proxy;
 
 import net.darkmorford.twitchforge.block.ModBlocks;
 import net.darkmorford.twitchforge.item.ModItems;

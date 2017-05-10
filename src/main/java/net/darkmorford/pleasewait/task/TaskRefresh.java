@@ -1,10 +1,12 @@
-package net.darkmorford.twitchforge.task;
+package net.darkmorford.pleasewait.task;
 
 import com.google.gson.*;
-import net.darkmorford.twitchforge.TwitchForge;
-import net.darkmorford.twitchforge.twitch.Stream;
-import net.darkmorford.twitchforge.twitch.TwitchState;
-import net.darkmorford.twitchforge.utils.InstantDeserializer;
+import net.darkmorford.pleasewait.PacketHandler;
+import net.darkmorford.pleasewait.PleaseWait;
+import net.darkmorford.pleasewait.message.MessageStreamStatus;
+import net.darkmorford.pleasewait.twitch.Stream;
+import net.darkmorford.pleasewait.twitch.TwitchState;
+import net.darkmorford.pleasewait.utils.InstantDeserializer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import okhttp3.OkHttpClient;
@@ -30,7 +32,7 @@ public class TaskRefresh implements Runnable
 
         if (channelId == 0L)
         {
-            TwitchForge.logger.log(Level.ERROR, "Refresh called before User ID initialized");
+            PleaseWait.logger.log(Level.ERROR, "Refresh called before User ID initialized");
             return;
         }
 
@@ -63,13 +65,15 @@ public class TaskRefresh implements Runnable
 
                 FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList()
                         .sendChatMsg(new TextComponentTranslation("stream.offline", channelName));
+
+                PacketHandler.INSTANCE.sendToAll(new MessageStreamStatus(false));
             }
             else
             {
                 if (!TwitchState.isStreamOnline)
                 {
                     // TODO: Signal when the stream transitions to online
-                    TwitchForge.logger.log(Level.INFO, "Streamer has just gone online!");
+                    PleaseWait.logger.log(Level.INFO, "Streamer has just gone online!");
                 }
 
                 TwitchState.isStreamOnline = true;
@@ -81,15 +85,17 @@ public class TaskRefresh implements Runnable
 
                 FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList()
                         .sendChatMsg(new TextComponentTranslation("stream.online", channelName, streamStatus.channel.status));
+
+                PacketHandler.INSTANCE.sendToAll(new MessageStreamStatus(true, TwitchState.streamTitle));
             }
         }
         catch (IOException e)
         {
-            TwitchForge.logger.log(Level.ERROR, e.getMessage());
+            PleaseWait.logger.log(Level.ERROR, e.getMessage());
         }
         catch (JsonSyntaxException e)
         {
-            TwitchForge.logger.log(Level.ERROR, e.getMessage());
+            PleaseWait.logger.log(Level.ERROR, e.getMessage());
         }
         finally
         {

@@ -1,6 +1,7 @@
-package net.darkmorford.twitchforge;
+package net.darkmorford.pleasewait;
 
-import net.darkmorford.twitchforge.proxy.CommonProxy;
+import net.darkmorford.pleasewait.proxy.CommonProxy;
+import net.darkmorford.pleasewait.twitch.TwitchState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
@@ -18,14 +19,21 @@ public class EventHandler
         EntityPlayer player = event.player;
         String playerName = player.getDisplayNameString();
 
-        // Send them a welcome message
-        player.addChatComponentMessage(new TextComponentTranslation("misc.motd", playerName));
+        // Inform them of the channel status
+        if (TwitchState.isStreamOnline)
+        {
+            player.addChatComponentMessage(new TextComponentTranslation("stream.online", TwitchState.channelDisplayName, TwitchState.streamTitle));
+        }
+        else
+        {
+            player.addChatComponentMessage(new TextComponentTranslation("stream.offline", TwitchState.channelDisplayName));
+        }
     }
 
     @SubscribeEvent
     public static void configChanged(ConfigChangedEvent.OnConfigChangedEvent event)
     {
-        if (event.getModID().equals(TwitchForge.MODID))
+        if (event.getModID().equals(PleaseWait.MODID))
         {
             if (CommonProxy.config.hasChanged())
                 CommonProxy.config.save();

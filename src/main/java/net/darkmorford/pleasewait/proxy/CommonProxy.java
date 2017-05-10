@@ -1,6 +1,6 @@
-package net.darkmorford.twitchforge.proxy;
+package net.darkmorford.pleasewait.proxy;
 
-import net.darkmorford.twitchforge.Config;
+import net.darkmorford.pleasewait.Config;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -15,7 +15,7 @@ public class CommonProxy
     public void preInit(FMLPreInitializationEvent event)
     {
         File configDir = event.getModConfigurationDirectory();
-        config = new Configuration(new File(configDir.getPath(), "twitchforge.cfg"));
+        config = new Configuration(new File(configDir.getPath(), "pleasewait.cfg"));
         Config.readConfig();
     }
 

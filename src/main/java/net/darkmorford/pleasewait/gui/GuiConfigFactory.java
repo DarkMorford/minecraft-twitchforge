@@ -1,8 +1,8 @@
-package net.darkmorford.twitchforge.gui;
+package net.darkmorford.pleasewait.gui;
 
-import net.darkmorford.twitchforge.Config;
-import net.darkmorford.twitchforge.TwitchForge;
-import net.darkmorford.twitchforge.proxy.CommonProxy;
+import net.darkmorford.pleasewait.Config;
+import net.darkmorford.pleasewait.PleaseWait;
+import net.darkmorford.pleasewait.proxy.CommonProxy;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraftforge.common.config.ConfigElement;
@@ -44,10 +44,10 @@ public class GuiConfigFactory implements IModGuiFactory
             super(
                     parent,
                     new ConfigElement(CommonProxy.config.getCategory(Config.CATEGORY_GENERAL)).getChildElements(),
-                    TwitchForge.MODID,
+                    PleaseWait.MODID,
                     false,
                     false,
-                    "TwitchForge Configuration"
+                    "PleaseWait Configuration"
             );
         }
     }
