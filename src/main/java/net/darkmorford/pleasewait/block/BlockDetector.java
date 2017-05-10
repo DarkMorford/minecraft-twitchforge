@@ -1,6 +1,6 @@
-package net.darkmorford.twitchforge.block;
+package net.darkmorford.pleasewait.block;
 
-import net.darkmorford.twitchforge.TwitchForge;
+import net.darkmorford.pleasewait.PleaseWait;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -16,9 +16,9 @@ public class BlockDetector extends Block
     {
         super(Material.ROCK);
 
-        setRegistryName(TwitchForge.MODID + ":streamDetector");
-        setUnlocalizedName(TwitchForge.MODID + ".streamDetector");
-        setCreativeTab(TwitchForge.tabTwitchForge);
+        setRegistryName(PleaseWait.MODID + ":streamDetector");
+        setUnlocalizedName(PleaseWait.MODID + ".streamDetector");
+        setCreativeTab(PleaseWait.tabPleaseWait);
     }
 
     @SideOnly(Side.CLIENT)

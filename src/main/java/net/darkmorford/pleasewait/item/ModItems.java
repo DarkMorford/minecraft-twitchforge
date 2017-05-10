@@ -1,7 +1,7 @@
-package net.darkmorford.twitchforge.item;
+package net.darkmorford.pleasewait.item;
 
-import net.darkmorford.twitchforge.TwitchForge;
-import net.darkmorford.twitchforge.block.ModBlocks;
+import net.darkmorford.pleasewait.PleaseWait;
+import net.darkmorford.pleasewait.block.ModBlocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraftforge.event.RegistryEvent;
@@ -36,6 +36,6 @@ public class ModItems
         // ItemBlocks
         event.getRegistry().register(new ItemBlock(ModBlocks.streamDetector)
                 .setRegistryName("twitchforge:streamDetector")
-                .setCreativeTab(TwitchForge.tabTwitchForge));
+                .setCreativeTab(PleaseWait.tabPleaseWait));
     }
 }

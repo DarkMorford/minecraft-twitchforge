@@ -1,4 +1,4 @@
-package net.darkmorford.twitchforge.block;
+package net.darkmorford.pleasewait.block;
 
 import net.minecraft.block.Block;
 import net.minecraftforge.event.RegistryEvent;

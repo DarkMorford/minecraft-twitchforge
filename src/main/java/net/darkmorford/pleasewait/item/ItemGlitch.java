@@ -1,6 +1,6 @@
-package net.darkmorford.twitchforge.item;
+package net.darkmorford.pleasewait.item;
 
-import net.darkmorford.twitchforge.TwitchForge;
+import net.darkmorford.pleasewait.PleaseWait;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -15,9 +15,9 @@ public class ItemGlitch extends Item
 {
     public ItemGlitch()
     {
-        setRegistryName(TwitchForge.MODID + ":glitch");
-        setUnlocalizedName(TwitchForge.MODID + ".glitch");
-        setCreativeTab(TwitchForge.tabTwitchForge);
+        setRegistryName(PleaseWait.MODID + ":glitch");
+        setUnlocalizedName(PleaseWait.MODID + ".glitch");
+        setCreativeTab(PleaseWait.tabPleaseWait);
     }
 
     @Override

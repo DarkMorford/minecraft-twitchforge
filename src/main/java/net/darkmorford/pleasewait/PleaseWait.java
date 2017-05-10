@@ -1,9 +1,9 @@
 package net.darkmorford.pleasewait;
 
 import net.darkmorford.pleasewait.command.CommandMain;
-import net.darkmorford.twitchforge.block.ModBlocks;
+import net.darkmorford.pleasewait.block.ModBlocks;
 import net.darkmorford.pleasewait.proxy.CommonProxy;
-import net.darkmorford.twitchforge.item.ModItems;
+import net.darkmorford.pleasewait.item.ModItems;
 import net.darkmorford.pleasewait.task.TaskGetUserId;
 import net.darkmorford.pleasewait.task.TaskRefresh;
 import net.minecraft.creativetab.CreativeTabs;
@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit;
         name = PleaseWait.MODNAME,
         version = PleaseWait.VERSION,
         useMetadata = true,
-        guiFactory = "net.darkmorford.pleasewait.gui.GuiConfigFactory",
+        guiFactory = "net.darkmorford.pleasewait.gui.GuiConfigFactory"
 )
 public class PleaseWait
 {
@@ -47,7 +47,7 @@ public class PleaseWait
     public static Logger logger;
 
     // Custom creative tabs
-    public static final CreativeTabs tabTwitchForge = new CreativeTabs("pleasewait") {
+    public static final CreativeTabs tabPleaseWait = new CreativeTabs("pleasewait") {
         @Override
         public Item getTabIconItem() {
             return ModItems.glitch;

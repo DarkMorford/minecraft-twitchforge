@@ -1,7 +1,7 @@
 package net.darkmorford.pleasewait.proxy;
 
-import net.darkmorford.twitchforge.block.ModBlocks;
-import net.darkmorford.twitchforge.item.ModItems;
+import net.darkmorford.pleasewait.block.ModBlocks;
+import net.darkmorford.pleasewait.item.ModItems;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 
 public class ClientProxy extends CommonProxy
