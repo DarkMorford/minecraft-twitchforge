@@ -11,7 +11,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@ObjectHolder("twitchforge")
+@ObjectHolder("pleasewait")
 @Mod.EventBusSubscriber
 public class ModItems
 {
@@ -35,7 +35,7 @@ public class ModItems
 
         // ItemBlocks
         event.getRegistry().register(new ItemBlock(ModBlocks.streamDetector)
-                .setRegistryName("twitchforge:streamDetector")
+                .setRegistryName("pleasewait:streamDetector")
                 .setCreativeTab(PleaseWait.tabPleaseWait));
     }
 }

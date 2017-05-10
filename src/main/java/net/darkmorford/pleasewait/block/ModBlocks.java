@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
-@ObjectHolder("twitchforge")
+@ObjectHolder("pleasewait")
 @Mod.EventBusSubscriber
 public class ModBlocks
 {

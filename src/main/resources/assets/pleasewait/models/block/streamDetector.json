@@ -1,6 +1,6 @@
 {
     "parent": "block/cube_all",
     "textures": {
-        "all": "twitchforge:blocks/streamDetector"
+        "all": "pleasewait:blocks/streamDetector"
     }
 }

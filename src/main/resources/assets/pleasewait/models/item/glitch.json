@@ -1,7 +1,7 @@
 {
     "parent": "builtin/generated",
     "textures": {
-        "layer0": "twitchforge:items/glitch"
+        "layer0": "pleasewait:items/glitch"
     },
     "display": {
         "thirdperson_righthand": {

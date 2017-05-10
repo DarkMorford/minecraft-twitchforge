@@ -1,7 +1,7 @@
 {
     "variants": {
         "normal": {
-            "model": "twitchforge:streamDetector"
+            "model": "pleasewait:streamDetector"
         }
     }
 }
