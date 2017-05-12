@@ -43,12 +43,25 @@ public class BlockStreamDetector extends Block
 
     @Override
     @Deprecated
+    public IBlockState getStateFromMeta(int meta)
+    {
+        return getDefaultState();
+    }
+
+    @Override
+    public int getMetaFromState(IBlockState state)
+    {
+        return 0;
+    }
+
+    @Override
+    @Deprecated
     public IBlockState getActualState(IBlockState state, IBlockAccess worldIn, BlockPos pos)
     {
         return state;
     }
 
-    // Set up the tile entity to check states
+    // Set up the tile entity to manage states
     @Override
     public boolean hasTileEntity(IBlockState state)
     {
