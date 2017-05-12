@@ -86,7 +86,12 @@ public class BlockStreamDetector extends Block
     @Deprecated
     public int getWeakPower(IBlockState state, IBlockAccess worldIn, BlockPos pos, EnumFacing side)
     {
-        return 0;
+        boolean isActive = state.getValue(PROPERTYACTIVE);
+
+        if (isActive)
+            return 15;
+        else
+            return 0;
     }
 
     @Override
