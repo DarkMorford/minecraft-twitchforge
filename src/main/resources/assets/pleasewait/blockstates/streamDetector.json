@@ -3,8 +3,8 @@
         "active=false": {
             "model": "pleasewait:streamDetector"
         },
-		"active=true": {
-			"model": "pleasewait:streamDetectorActive"
-		}
+        "active=true": {
+            "model": "pleasewait:streamDetectorActive"
+        }
     }
 }
