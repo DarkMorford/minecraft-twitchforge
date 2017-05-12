@@ -62,10 +62,6 @@ public class TaskRefresh implements Runnable
             if (streamStatus == null)
             {
                 TwitchState.isStreamOnline = false;
-
-                FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList()
-                        .sendChatMsg(new TextComponentTranslation("stream.offline", channelName));
-
                 PacketHandler.INSTANCE.sendToAll(new MessageStreamStatus(false));
             }
             else
@@ -74,6 +70,9 @@ public class TaskRefresh implements Runnable
                 {
                     // TODO: Signal when the stream transitions to online
                     PleaseWait.logger.log(Level.INFO, "Streamer has just gone online!");
+
+                    FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList()
+                            .sendChatMsg(new TextComponentTranslation("stream.online", channelName, streamStatus.channel.status));
                 }
 
                 TwitchState.isStreamOnline = true;
@@ -82,9 +81,6 @@ public class TaskRefresh implements Runnable
                 TwitchState.streamStartTime = streamStatus.created_at;
                 TwitchState.streamTitle = streamStatus.channel.status;
                 TwitchState.streamUri = streamStatus.channel.url;
-
-                FMLCommonHandler.instance().getMinecraftServerInstance().getPlayerList()
-                        .sendChatMsg(new TextComponentTranslation("stream.online", channelName, streamStatus.channel.status));
 
                 PacketHandler.INSTANCE.sendToAll(new MessageStreamStatus(true, TwitchState.streamTitle));
             }
